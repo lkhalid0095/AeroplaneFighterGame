@@ -33,7 +33,7 @@ public class PlayerOneMovement : MonoBehaviour
         rigid.velocity = new Vector2(horizontal * speed, rigid.velocity.y);
          if (horizontal > 0 && isFacingRight || horizontal < 0 && !isFacingRight)
             flip();
-            rigid.velocity = new Vector2(rigid.velocity.x, vertical* speed);
+            rigid.AddForce(new Vector2(rigid.velocity.x, vertical* speed));
     }
 
     public void flip(){

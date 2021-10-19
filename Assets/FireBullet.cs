@@ -32,7 +32,7 @@ public class FireBullet : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        fire();
+        //fire();
         
     }
     void FixedUpdate(){
@@ -51,6 +51,6 @@ public class FireBullet : MonoBehaviour
     {
 
         AudioSource.PlayClipAtPoint(audio.clip, transform.position);
-        Destroy(gameObject); //destroys itself after points have been added 
+        Destroy(bullet); //destroys itself after points have been added 
     }
 }
