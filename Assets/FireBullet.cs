@@ -23,8 +23,9 @@ public class FireBullet : MonoBehaviour
 
         if(bullet == null)
             bullet = GameObject.FindGameObjectWithTag("Fire");
-        if(playerOne ==null)
-           playerOne = GameObject.FindGameObjectWithTag("Player");
+        
+        if(playerOne == null)
+            bullet = GameObject.FindGameObjectWithTag("Player");
 
     }
 
@@ -36,22 +37,17 @@ public class FireBullet : MonoBehaviour
     private void fire(){
         oneXPos = playerOne.transform.position.x;
         oneYPos = playerOne.transform.position.y;
-        if (Input.GetKey("space")){
-            // if(isFlipped){
-                
-            //     Vector3 flipPos = new Vector3(oneXPos -6, oneYPos-.67f,-1);
-            //      Instantiate(bullet, flipPos, Quaternion.identity);
-
-            // }
-            Vector3 position = new Vector3(oneXPos + 2, oneYPos-.67f,-1);
+        if (Input.GetButton("Fire1")){
+            Vector3 position = new Vector3(oneXPos +1 , oneYPos-.67f,-1);
             Instantiate(bullet, position, Quaternion.identity);
-        } 
+            }
+        
 
     }
-    //  private void OnTriggerEnter2D(Collider2D collision)
-    // {
+     private void OnTriggerEnter2D(Collider2D collision)
+    {
 
-    //     AudioSource.PlayClipAtPoint(audio.clip, transform.position);
-    //     Destroy(bullet); //destroys itself after points have been added 
-    // }
+        AudioSource.PlayClipAtPoint(audio.clip, transform.position);
+        Destroy(bullet); //destroys itself after points have been added 
+    }
 }

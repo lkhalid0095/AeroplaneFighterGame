@@ -41,4 +41,8 @@ public class PlayerOneMovement : MonoBehaviour
         isFacingRight = !isFacingRight;
 
     }
+
+    public bool GetFace(){
+        return isFacingRight;
+    }
 }
