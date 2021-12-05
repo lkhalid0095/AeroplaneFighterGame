@@ -38,10 +38,10 @@ public class PlayerHeath : MonoBehaviour
     //initially you get 1 health, every time you get hit you lose a health point
     public void decHealth(int points)
     {
-        score += points;
+        pScore += points;
         DisplayScore();
 
-        if (score > score_threshold)
+        if (pScore > score_threshold)
             AdvanceLevel();
 
     }
@@ -54,7 +54,7 @@ public class PlayerHeath : MonoBehaviour
 
     public void DisplayScore()
     {
-        playerScore.text = "Player: " + score;
+        playerScore.text = "Player: " + pScore;
         enemyScore.text = "Enemy: ";
     }
 
