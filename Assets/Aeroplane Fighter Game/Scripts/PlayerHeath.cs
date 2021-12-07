@@ -6,56 +6,109 @@ using UnityEngine.SceneManagement;
 
 public class PlayerHeath : MonoBehaviour
 {
-    [SerializeField] int pScore; //player health
-    [SerializeField] int eScore; //enemy health
-    const int DEFAULT_POINTS = 1; //add one if player shoots
-    const int NUM_POINTS_PER_LEVEL = 5;
+    [SerializeField] int pHealth; //player health
+    [SerializeField] int eHealth; //enemy health
+    [SerializeField] int score;
+    public GameObject controller;
+    const int DEFAULT_POINTS = -1; //decrease one if player shoots another player
+    const int HEALTH_POINTS = 5;
+    const int EASY_LEVEL=1;
+    const int SCORE_MULTIPLIER = 10;
+    const int DEFAULT_PTS_LEVEL = 50;
     int score_threshold;
-    [SerializeField] Text playerScore;
+    [SerializeField] Text playerHealth;
     [SerializeField] Text sceneTxt;
-    [SerializeField] Text enemyScore;
+    [SerializeField] Text enemyHealth;
+    [SerializeField] Text playerScore;
+    [SerializeField] Text nameTxt;
     [SerializeField] int level;
     [SerializeField] string playerName;
 
     // Start is called before the first frame update
     void Start()
     {
-        level = SceneManager.GetActiveScene().buildIndex;
-        //DisplayName();
+        pHealth = HEALTH_POINTS;
+        eHealth = HEALTH_POINTS;
+        level = SceneManager.GetActiveScene().buildIndex-1;
+        playerName = PersistentData.Instance.GetName();
+        score = PersistentData.Instance.GetScore();
+        score_threshold = level * DEFAULT_PTS_LEVEL;
+        PersistentData.Instance.SetIndex(level + 1);
         DisplayLevel();
         DisplayScore();
+        DisplayHealth();
+        DisplayName();
 
-
-
+        if(controller == null)
+        {
+            controller = GameObject.FindGameObjectWithTag("GameController");
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-
-    }
     
-    //initially you get 1 health, every time you get hit you lose a health point
-    public void decHealth(int points)
-    {
-        pScore += points;
-        DisplayScore();
+    }
 
-        if (pScore > score_threshold)
+    //add score
+    public void addPoints(){
+        score += SCORE_MULTIPLIER;
+        DisplayScore();
+        PersistentData.Instance.SetScore(score);
+        if (score > score_threshold)
             AdvanceLevel();
 
     }
-
-
-    public void decHealth()
+    
+    //decreasone one from health
+    public void decPlayerHealth(int points)
     {
-        decHealth(DEFAULT_POINTS);
+        pHealth += points;
+        if(pHealth ==0)
+           controller.GetComponent<ButtonFunctions>().PlayGame();
+        DisplayHealth();
+
+    }
+    public void decPlayerHealth()
+    {
+        decPlayerHealth(DEFAULT_POINTS);
+    }
+    public void decEnemyHealth(int points)
+    {
+        eHealth += points;
+        if(eHealth == 0)
+          AdvanceLevel();
+        DisplayHealth();
+
+    }
+    public void decEnemyHealth()
+    {
+        decEnemyHealth(DEFAULT_POINTS);
     }
 
+    public int getPHealth()
+    {
+        return pHealth;
+    }
+
+    public int getEHealth()
+    {
+        return eHealth;
+    }
+
+      public int getLevel()
+    {
+        return level;
+    }
     public void DisplayScore()
     {
-        playerScore.text = "Player: " + pScore;
-        enemyScore.text = "Enemy: ";
+        playerScore.text = "Score: " + score;
+    }
+    public void DisplayHealth()
+    {
+        playerHealth.text = "Player: " + pHealth;
+        enemyHealth.text = "Enemy: " + eHealth;
     }
 
     public void DisplayLevel()
@@ -65,10 +118,11 @@ public class PlayerHeath : MonoBehaviour
 
     public void AdvanceLevel()
     {
-        SceneManager.LoadScene(level + 2);
+        SceneManager.LoadScene(level+2);
     }
+    public void DisplayName()
+    {
+        nameTxt.text = "Hello, " + playerName;
+    }
+
 }
-    // public void DisplayName()
-    // {
-    //     nameTxt.text = "Hello, " + playerName;
-    // }

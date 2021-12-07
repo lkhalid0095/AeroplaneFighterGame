@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class BulletMovement : MonoBehaviour
 {
@@ -8,10 +9,12 @@ public class BulletMovement : MonoBehaviour
     public GameObject playerOne;
     public AudioSource audio;
     public GameObject enemy;
+    public GameObject controller;
     [SerializeField] float speed = 6;
     [SerializeField] bool isFlipped = false;
     const int RIGHT_MVMT = 1;
     const int LEFT_MVMT = -1;
+    const int DEFAULT_LOST = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,6 +32,10 @@ public class BulletMovement : MonoBehaviour
         
         if (audio == null)
             audio = GetComponent<AudioSource>();
+        if(controller == null)
+        
+            controller = GameObject.FindGameObjectWithTag("GameController");
+         
 
 
     }
@@ -68,8 +75,21 @@ public class BulletMovement : MonoBehaviour
 
         if(collision.gameObject.CompareTag("Opponent"))
         {
+            controller.GetComponent<PlayerHeath>().decEnemyHealth();
+            controller.GetComponent<PlayerHeath>().addPoints();
+            int health = controller.GetComponent<PlayerHeath>().getEHealth();
+            int currentLevel = controller.GetComponent<PlayerHeath>().getLevel();
+            
             audio.Play();
-            Destroy(enemy);
+            
+                //if player's health is zero, then destroy player, and next level
+                if(health == DEFAULT_LOST){
+
+                
+                    Destroy(enemy);
+                    controller.GetComponent<PlayerHeath>().AdvanceLevel();
+                
+            }   
             
         }
 

@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+
 
 public class EnemyBulletMovement : MonoBehaviour
 {
@@ -13,6 +16,8 @@ public class EnemyBulletMovement : MonoBehaviour
     const int RIGHT_MVMT = 1;
     const int LEFT_MVMT = -1;
     [SerializeField] bool playSound; 
+    public GameObject controller;
+    const int DEFAULT_LOST = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -30,6 +35,11 @@ public class EnemyBulletMovement : MonoBehaviour
         
         if (audio == null)
             audio = GetComponent<AudioSource>();
+
+        if(controller == null)
+        {
+            controller = GameObject.FindGameObjectWithTag("GameController");
+        }
 
 
     }
@@ -69,11 +79,15 @@ public class EnemyBulletMovement : MonoBehaviour
 
         if(collision.gameObject.CompareTag("Player"))
         {
-            
+            controller.GetComponent<PlayerHeath>().decPlayerHealth();
+            int health = controller.GetComponent<PlayerHeath>().getPHealth();
             audio.Play();
-            Destroy(playerOne);
-            
-            
+            //if player's health is zero, then destroy player, and restart level
+                if(health == DEFAULT_LOST){
+                    Destroy(playerOne);
+                    PersistentData.Instance.SetScore(DEFAULT_LOST);
+                    controller.GetComponent<ButtonFunctions>().PlayGame();
+            }   
         }
 
     }

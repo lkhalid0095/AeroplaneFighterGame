@@ -5,7 +5,31 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 0
+    path: Assets/Aeroplane Fighter Game/Scenes/AeroplaneLevel1.unity
+    guid: 8c1d1a70435234e2691434550352dd61
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
+    path: Assets/Aeroplane Fighter Game/Scenes/menu.unity
+    guid: 6117084a15d254a20873a3175f100d87
+  - enabled: 1
+    path: Assets/Aeroplane Fighter Game/Scenes/instructions.unity
+    guid: f5d5cb01486284baa85ab152fb5d008b
+  - enabled: 1
+    path: Assets/Aeroplane Fighter Game/Scenes/level1.unity
+    guid: 5a6ce992d8cbb44609e949d158e5fb12
+  - enabled: 1
+    path: Assets/Aeroplane Fighter Game/Scenes/level2.unity
+    guid: de5fbc6127aa544c7b98a2f45500696c
+  - enabled: 1
+    path: Assets/Aeroplane Fighter Game/Scenes/level3.unity
+    guid: a170b43a4104d4193829469a96b37dc9
+  - enabled: 1
+    path: Assets/Aeroplane Fighter Game/Scenes/highscores.unity
+    guid: 7a10499dbab2f4f07a6fcbcc927d56bb
+  - enabled: 1
+    path: Assets/Aeroplane Fighter Game/Scenes/settings.unity
+    guid: 4ea0f7074476c4d7dbb452aac930fc4c
   m_configObjects: {}

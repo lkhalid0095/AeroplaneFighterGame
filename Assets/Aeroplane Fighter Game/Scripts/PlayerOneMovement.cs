@@ -11,6 +11,9 @@ public class PlayerOneMovement : MonoBehaviour
     const int AUTO_RIGHT = -1; //moves right
     const int AUTO_LEFT = 1; //moves left
     public bool isFacingRight = true;
+    // [SerializeField] Animator anim;
+    // const int NOT_BLASTED = 0;
+    // const int BLASTED = 1;
     
     // Start is called before the first frame update
     void Start()
@@ -18,7 +21,11 @@ public class PlayerOneMovement : MonoBehaviour
         if (rigid == null){ 
             
             rigid = GetComponent <Rigidbody2D>();
+
         }
+        // if (anim == null)
+        //     anim = GetComponent<Animator>();
+        // anim.SetInteger("blast", NOT_BLASTED);
 
 
     }

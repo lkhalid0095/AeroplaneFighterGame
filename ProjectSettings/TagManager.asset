@@ -8,6 +8,10 @@ TagManager:
   - Bounds
   - PlayerFire
   - EnemyFire
+  - Fire
+  - ShowWhenPaused
+  - ShowWhenResumed
+  - Input
   layers:
   - Default
   - TransparentFX

@@ -105,6 +105,7 @@ MonoBehaviour:
   speed: 6
   isFlipped: 0
   playSound: 0
+  controller: {fileID: 0}
 --- !u!50 &9023311229747092243
 Rigidbody2D:
   serializedVersion: 4
