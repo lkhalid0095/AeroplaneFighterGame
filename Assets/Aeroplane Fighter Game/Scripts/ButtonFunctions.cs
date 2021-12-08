@@ -43,17 +43,12 @@ public class ButtonFunctions : MonoBehaviour
     public void PlayGame()
     {
        
-        if (index > 0)
-        {
-            SceneManager.LoadScene(index);
-            Time.timeScale = 1;
-        }
-        else
-        {
+        
+        
             string playerName = input.text;
             PersistentData.Instance.SetName(playerName);
             SceneManager.LoadScene("level1");
-        }
+        
 
     }
 
